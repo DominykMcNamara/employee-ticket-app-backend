@@ -1,0 +1,24 @@
+{
+  "name": "employee-ticket-app-backend",
+  "version": "1.0.0",
+  "description": "Server for an employee ticketing app",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DominykMcNamara/employee-ticket-app-backend.git"
+  },
+  "keywords": [
+    "express",
+    "crud",
+    "postgresql"
+  ],
+  "author": "Dominyk Smith",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DominykMcNamara/employee-ticket-app-backend/issues"
+  },
+  "homepage": "https://github.com/DominykMcNamara/employee-ticket-app-backend#readme"
+}
