@@ -1,7 +1,7 @@
 require("dotenv").config();
 const pg = require("pg");
 
-async () => {
+(async () => {
   const usersTable = `
         CREATE TABLE IF NOT EXISTS Users (
             id INT PRIMARY KEY ALWAYS AS IDENTITY NOT NULL,
@@ -27,4 +27,21 @@ async () => {
             FOREIGN KEY (created_by_user_id) REFERENCES USERS(id)
             
         )`;
-};
+
+  try {
+    const db = new pg.Client({
+      user: process.env.PGUSER,
+      host: process.env.PGHOST,
+      database: process.env.PGDATABASE,
+      password: process.env.PGPASSWORD,
+      port: process.env.PGPORT,
+    });
+    await db.connect();
+    await db.query(usersTable);
+    await db.query(ticketsTable);
+    console.log("Tables Created!");
+    await db.end();
+  } catch (err) {
+    console.log(err);
+  }
+})();
