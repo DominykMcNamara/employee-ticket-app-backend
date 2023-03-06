@@ -4,7 +4,7 @@ const pg = require("pg");
 (async () => {
   const usersTable = `
         CREATE TABLE IF NOT EXISTS Users (
-            id INT PRIMARY KEY ALWAYS AS IDENTITY NOT NULL,
+            id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY NOT NULL,
             created_at TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP,
             modified_at TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP,
             email VARCHAR(100)  NOT NULL UNIQUE,
@@ -17,8 +17,8 @@ const pg = require("pg");
 
   const ticketsTable = `
         CREATE TABLE IF NOT EXISTS Tickets (
-            id INT PRIMARY KEY ALWAYS AS IDENTITY NOT NULL,
-            created_by_user_id INT NOT NULL
+            id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY NOT NULL,
+            created_by_user_id INT NOT NULL,
             created_at TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP,
             modified_at TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP,
             issue VARCHAR(100) NOT NULL,
