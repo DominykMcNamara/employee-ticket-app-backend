@@ -25,9 +25,12 @@
   },
   "homepage": "https://github.com/DominykMcNamara/employee-ticket-app-backend#readme",
   "dependencies": {
+    "chai": "^4.3.7",
     "dotenv": "^16.0.3",
+    "mocha": "^10.2.0",
     "nodemon": "^2.0.21",
     "pg": "^8.9.0",
-    "pg-promise": "^11.3.0"
+    "pg-promise": "^11.3.0",
+    "supertest": "^6.3.3"
   }
 }
