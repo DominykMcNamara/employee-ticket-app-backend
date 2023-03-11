@@ -7,6 +7,7 @@ const UserModel = require("../models/users");
 const userModelInstance = new UserModel();
 
 describe("Creating a User", () => {
+  // MOCK DB
   before("Mock db connection", async () => {
     const dbConfig = {
       user: process.env.PGUSER,
@@ -40,6 +41,7 @@ describe("Creating a User", () => {
     });
   });
 
+  // CREATE
   describe("#id", () => {
     it("is a string", async () => {
       const user = await userModelInstance.create({
@@ -111,12 +113,35 @@ describe("Creating a User", () => {
         });
       });
 
-      describe('Finding all users', () => {
+      //READ
+      describe("Finding all users", () => {
         it("returns all users", async () => {
           const users = await userModelInstance.findAllEmployees();
           assert.equal(users.length, 1);
         });
-      })
+      });
+      describe("Finding a user by id", () => {
+        it("returns a single user based on their id", async () => {
+          const user = await userModelInstance.findEmployeeById(1);
+          assert.equal(user.id, 1);
+        });
+      });
+      describe("Finding a user by email", () => {
+        it("returns a single user based on their email", async () => {
+          const user = await userModelInstance.findEmployeeByEmail(
+            "Dom@gmail.com"
+          );
+          assert.equal(user.email, "Dom@gmail.com");
+        });
+      });
+      describe("Finding a user by username", () => {
+        it("returns a single user based on their username", async () => {
+          const user = await userModelInstance.findEmployeeByUsername(
+            "dMcNamara"
+          );
+          assert.equal(user.username, "dMcNamara");
+        });
+      });
     });
   });
 });
