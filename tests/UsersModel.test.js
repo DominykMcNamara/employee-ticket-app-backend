@@ -110,6 +110,13 @@ describe("Creating a User", () => {
           assert.strictEqual(user.last_name, "McNamara");
         });
       });
+
+      describe('Finding all users', () => {
+        it("returns all users", async () => {
+          const users = await userModelInstance.findAllEmployees();
+          assert.equal(users.length, 1);
+        });
+      })
     });
   });
 });

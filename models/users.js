@@ -22,4 +22,18 @@ module.exports = class UsersModel {
       throw new Error(err);
     }
   }
+
+  async findAllEmployees() {
+    try {
+      const command =
+        'SELECT id, created_at, modified_at, first_name, last_name, email, username FROM "users"';
+      const results = await db.query(command);
+      if (results.rows?.length) {
+        return results.rows;
+      }
+      return null;
+    } catch (err) {
+      throw new Error(err);
+    }
+  }
 };
