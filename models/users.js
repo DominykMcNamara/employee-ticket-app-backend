@@ -1,6 +1,6 @@
 const db = require("../db");
 const pgp = require("pg-promise")({ capSQL: true });
-const bcrypt = require('bcrypt')
+const bcrypt = require("bcrypt");
 module.exports = class UsersModel {
   constructor(data = {}) {
     (this.email = data.email),
@@ -84,4 +84,23 @@ module.exports = class UsersModel {
   }
 
   // UPDATE
+  async updateUser(data) {
+    const { id, ...params } = data;
+    const updatedUser = {
+      username: params.username,
+      password: await bcrypt.hash(params.password, 10),
+      email: params.email
+    };
+    try {
+      const findUser = pgp.as.format("WHERE id = ${id} RETURNING *", { id });
+      const command = pgp.helpers.update(updatedUser, null, "users") + findUser;
+      const results = await db.query(command);
+      if (results.rows?.length) {
+        return results.rows[0];
+      }
+      return null;
+    } catch (err) {
+      throw new Error(err);
+    }
+  }
 };

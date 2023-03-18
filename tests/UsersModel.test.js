@@ -142,6 +142,46 @@ describe("Creating a User", () => {
           assert.equal(user.username, "dMcNamara");
         });
       });
+
+      //UPDATE
+      describe("Updating an users' information", () => {
+        it("Finds the correct user", async () => {
+          const updatedUser = await userModelInstance.updateUser({
+            id: 1,
+            username: "Maple",
+            password: "pwd",
+            email: "Maple@email.com",
+          });
+          assert.equal(updatedUser.id, 1);
+        });
+        it("Updates and returns the correct user' username", async () => {
+          const updatedUser = await userModelInstance.updateUser({
+            id: 1,
+            username: "Maple",
+            password: "pwd",
+            email: "Maple@email.com",
+          });
+          assert.equal(updatedUser.username, "Maple");
+        });
+        it("Updates, hashes, and returns the updated user' password", async () => {
+          const updatedUser = await userModelInstance.updateUser({
+            id: 1,
+            username: "Maple",
+            password: "pwd",
+            email: "Maple@email.com",
+          });
+          assert.notEqual(updatedUser.password, "pwd");
+        });
+        it("Updates and returns the updated user' email", async () => {
+          const updatedUser = await userModelInstance.updateUser({
+            id: 1,
+            username: "Maple",
+            password: "pwd",
+            email: "Maple@email.com",
+          });
+          assert.equal(updatedUser.email, "Maple@email.com");
+        });
+      });
     });
   });
 });
