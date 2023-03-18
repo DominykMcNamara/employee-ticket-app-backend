@@ -25,7 +25,7 @@ module.exports = class UsersModel {
   }
 
   // READ
-  async findAllEmployees() {
+  async findAllUsers() {
     try {
       const command =
         'SELECT id, created_at, modified_at, first_name, last_name, email, username FROM "users"';
@@ -38,7 +38,7 @@ module.exports = class UsersModel {
       throw new Error(err);
     }
   }
-  async findEmployeeById(id) {
+  async findUserById(id) {
     try {
       const command =
         'SELECT id, created_at, modified_at, first_name, last_name, email, username FROM "users" WHERE id = $1';
@@ -53,7 +53,7 @@ module.exports = class UsersModel {
     }
   }
 
-  async findEmployeeByEmail(email) {
+  async findUserByEmail(email) {
     try {
       const command =
         'SELECT id, created_at, modified_at, first_name, last_name, email, username FROM "users" WHERE email = $1';
@@ -68,7 +68,7 @@ module.exports = class UsersModel {
     }
   }
 
-  async findEmployeeByUsername(username) {
+  async findUserByUsername(username) {
     try {
       const command =
         'SELECT id, created_at, modified_at, first_name, last_name, email, username FROM "users" WHERE username = $1';
@@ -101,6 +101,21 @@ module.exports = class UsersModel {
       return null;
     } catch (err) {
       throw new Error(err);
+    }
+  }
+
+  // DELETE
+  async deleteUserById(id) {
+    try {
+      const command = "DELETE FROM users WHERE id = $1"
+      const value = [id]
+      const results = db.query(command, value)
+      if(results.rows?.length) {
+        return results.rows[0]
+      }
+      return null
+    } catch (err) {
+      throw new Error(err)
     }
   }
 };

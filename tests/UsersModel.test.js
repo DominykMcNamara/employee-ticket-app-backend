@@ -116,29 +116,25 @@ describe("Creating a User", () => {
       //READ
       describe("Finding all users", () => {
         it("returns all users", async () => {
-          const users = await userModelInstance.findAllEmployees();
+          const users = await userModelInstance.findAllUsers();
           assert.equal(users.length, 1);
         });
       });
       describe("Finding a user by id", () => {
         it("returns a single user based on their id", async () => {
-          const user = await userModelInstance.findEmployeeById(1);
+          const user = await userModelInstance.findUserById(1);
           assert.equal(user.id, 1);
         });
       });
       describe("Finding a user by email", () => {
         it("returns a single user based on their email", async () => {
-          const user = await userModelInstance.findEmployeeByEmail(
-            "Dom@gmail.com"
-          );
+          const user = await userModelInstance.findUserByEmail("Dom@gmail.com");
           assert.equal(user.email, "Dom@gmail.com");
         });
       });
       describe("Finding a user by username", () => {
         it("returns a single user based on their username", async () => {
-          const user = await userModelInstance.findEmployeeByUsername(
-            "dMcNamara"
-          );
+          const user = await userModelInstance.findUserByUsername("dMcNamara");
           assert.equal(user.username, "dMcNamara");
         });
       });
@@ -180,6 +176,14 @@ describe("Creating a User", () => {
             email: "Maple@email.com",
           });
           assert.equal(updatedUser.email, "Maple@email.com");
+        });
+      });
+
+      //DELETE
+      describe("Delete a user", () => {
+        it("Deletes a user by the users id", async () => {
+          const deletedUser = await userModelInstance.deleteUserById({ id: 1 });
+          assert.equal(deletedUser, null);
         });
       });
     });
