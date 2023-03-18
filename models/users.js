@@ -1,6 +1,6 @@
 const db = require("../db");
 const pgp = require("pg-promise")({ capSQL: true });
-
+const bcrypt = require('bcrypt')
 module.exports = class UsersModel {
   constructor(data = {}) {
     (this.email = data.email),
@@ -82,4 +82,6 @@ module.exports = class UsersModel {
       throw new Error(err);
     }
   }
+
+  // UPDATE
 };
